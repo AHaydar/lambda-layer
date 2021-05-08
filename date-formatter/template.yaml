@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: date-formatter
+
+Resources:
+  DateFormatterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.lambdaHandler
+      Runtime: nodejs12.x
+      FunctionName: date-formatter
+      Layers:
+        - !Ref Momentlayer
+  Momentlayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: moment-layer-2-29-1
+      Description: Moment layer 2.29.1
+      ContentUri: ../layer
+      CompatibleRuntimes:
+        - nodejs12.x
